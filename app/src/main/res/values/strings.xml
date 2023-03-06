@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TravelWishlist</string>
+    <string name="where_do_you_want_to_go">Where do you want to go?</string>
+    <string name="add">Add</string>
+    <string name="background_content_description">A Canal in the Netherlands</string>
+    <string name="duplicate_entry">You Already added that place</string>
+    <string name="enter_a_place_name">Enter a place name</string>
+    <string name="map_icon">Show Map</string>
+    <string name="created_on">"Created on: %1$s"</string>
+    <string name="confirmation_place_deleted">%1$s deleted</string>
+    <string name="undo">UNDO</string>
+</resources>

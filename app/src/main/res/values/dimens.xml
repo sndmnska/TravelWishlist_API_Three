@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="medium_spacing">10dp</dimen>
+    <dimen name="small_spacing">5dp</dimen>
+    <dimen name="large_spacing">20dp</dimen>
+    <dimen name="extra_large_spacing">30dp</dimen>
+
+    <dimen name="medium_text_size">15sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">30dp</dimen>
+
+</resources>
