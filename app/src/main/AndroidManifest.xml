@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TravelWishlist"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.smeiskaudio.travelwishlist2_with_reason.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(),
     private lateinit var newPlaceEditText: EditText
     private lateinit var addNewPlaceButton: Button
     private lateinit var placeListRecyclerView: RecyclerView
+    private lateinit var reasonToGoEditText: EditText
 
     private lateinit var placesRecyclerAdapter: PlaceRecyclerAdapter
 
@@ -56,31 +57,53 @@ class MainActivity : AppCompatActivity(),
         placeListRecyclerView = findViewById(R.id.place_list)
         addNewPlaceButton = findViewById(R.id.add_new_place_button)
         newPlaceEditText = findViewById(R.id.new_place_name)
+        reasonToGoEditText = findViewById(R.id.reason_for_going)
     }
 
     private fun addNewPlace() {
         val name = newPlaceEditText.text.toString().trim()
-        if (name.isEmpty()) {
-            Toast.makeText(
-                this,
-                getString(R.string.enter_a_place_name),
-                Toast.LENGTH_SHORT
-            )
-                .show()
-        } else {
-            val newPlace = Place(name)
-            val positionAdded = placesViewModel.addNewPlace(newPlace)
-            if (positionAdded == -1) {
+        val reason = reasonToGoEditText.text.toString().trim()  // to utilize the reason field
+
+        when {
+            name.isEmpty() && reason.isEmpty() -> {
                 Toast.makeText(
                     this,
-                    getString(R.string.duplicate_entry),
+                    getString(R.string.enter_text_in_both_fields),
                     Toast.LENGTH_SHORT
                 )
                     .show()
-            } else {
-                placesRecyclerAdapter.notifyItemInserted(positionAdded)
-                clearForm()
-                hideKeyboard()
+            }
+            name.isEmpty() -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.enter_a_place_name),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+            reason.isEmpty() -> {
+                Toast.makeText(
+                    this,
+                    getString(R.string.enter_a_reason),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+            else -> {
+                val newPlace = Place(name, reason)
+                val positionAdded = placesViewModel.addNewPlace(newPlace)
+                if (positionAdded == -1) {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.duplicate_entry),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                } else {
+                    placesRecyclerAdapter.notifyItemInserted(positionAdded)
+                    clearForm()
+                    hideKeyboard()
+                }
             }
         }
 
@@ -88,6 +111,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun clearForm() {
         newPlaceEditText.text.clear()
+        reasonToGoEditText.text.clear() // clear text from reason EditText
     }
 
     private fun hideKeyboard() {

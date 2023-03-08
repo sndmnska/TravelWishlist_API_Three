@@ -5,16 +5,19 @@
     android:id="@+id/wishlist_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.smeiskaudio.travelwishlist2_with_reason.MainActivity">
 
     <!--    This ImageView is added first as a background.  The others are added on top. -->
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/background_content_description"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/travel_background" />
+        app:srcCompat="@drawable/travel_background"
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <EditText
         android:id="@+id/new_place_name"
@@ -26,9 +29,26 @@
         android:hint="@string/where_do_you_want_to_go"
         android:inputType="text"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/reason_for_going"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_spacing"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="@string/why_do_you_want_to_go_there"
+        android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/add_new_place_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/new_place_name"
+        tools:ignore="HardcodedText"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/add_new_place_button"
@@ -38,20 +58,19 @@
         android:backgroundTint="@android:color/black"
         android:text="@string/add"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/new_place_name"
+        app:layout_constraintBottom_toBottomOf="@+id/reason_for_going"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/new_place_name" />
+        app:layout_constraintTop_toTopOf="@+id/reason_for_going" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/place_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_place_name"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/reason_for_going" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

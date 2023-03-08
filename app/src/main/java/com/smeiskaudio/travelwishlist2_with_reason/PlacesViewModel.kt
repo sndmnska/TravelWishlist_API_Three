@@ -12,9 +12,9 @@ class PlacesViewModel : ViewModel() {
 
     private val places =
         mutableListOf<Place>(
-            Place("London, UK"),
-            Place("Utrecht, NL"),
-            Place("Milwaukee, WI, USA", Date())
+            Place("London, UK", "Never been there, always wanted to visit."),
+            Place("Veldhoven, NL", "Family lives nearby"),
+            Place("Milwaukee, WI, USA", "More family lives nearby", Date())
         ) // let user add places
 
     // enable access to list
