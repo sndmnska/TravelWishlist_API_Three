@@ -1,4 +1,4 @@
-package com.smeiskaudio.travelwishlist
+package com.smeiskaudio.travelwishlist2_with_reason
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.smeiskaudio.travelwishlist.R
 
 interface OnListItemClickedListener {
     fun onListItemClicked(place: Place)
@@ -14,8 +15,10 @@ interface OnListItemClickedListener {
 /** You'll see a lot of red until you're done with the Adapter */
 
 
-class PlaceRecyclerAdapter(private val places: List<Place>,
-                           private val onListItemClickedListener: OnListItemClickedListener):
+class PlaceRecyclerAdapter(
+    private val places: List<Place>,
+    private val onListItemClickedListener: OnListItemClickedListener
+) :
     RecyclerView.Adapter<PlaceRecyclerAdapter.ViewHolder>()     // extends this
 
 {
@@ -27,7 +30,7 @@ class PlaceRecyclerAdapter(private val places: List<Place>,
     // inner classes - add 'inner'
 
     // nested classes - this is one - self-contained thing
-    inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(place: Place) {
             val placeNameTextView: TextView = view.findViewById(R.id.place_name)
             placeNameTextView.text = place.name
@@ -53,7 +56,11 @@ class PlaceRecyclerAdapter(private val places: List<Place>,
     // display the list on screen
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.place_list_item, parent, false) // attachToRoot means is it on a static place on the whole screen
+            .inflate(
+                R.layout.place_list_item,
+                parent,
+                false
+            ) // attachToRoot means is it on a static place on the whole screen
         return ViewHolder(view)
     }
 

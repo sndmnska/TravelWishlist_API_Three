@@ -1,4 +1,4 @@
-package com.smeiskaudio.travelwishlist
+package com.smeiskaudio.travelwishlist2_with_reason
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -10,10 +10,10 @@ interface OnDateChangedListener {
 
 }
 
-class OnListItemSwipeListener(private val onDataChangedListener: OnDateChangedListener):
+class OnListItemSwipeListener(private val onDataChangedListener: OnDateChangedListener) :
     ItemTouchHelper.SimpleCallback(
-    ItemTouchHelper.UP or ItemTouchHelper.DOWN, // to reorder
-    ItemTouchHelper.RIGHT // to delete
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN, // to reorder
+        ItemTouchHelper.RIGHT // to delete
     ) {
     override fun onMove( // moving up and down
         recyclerView: RecyclerView, // the recyclerview itself, not used here

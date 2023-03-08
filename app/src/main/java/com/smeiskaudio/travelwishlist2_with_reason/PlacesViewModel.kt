@@ -1,16 +1,21 @@
-package com.smeiskaudio.travelwishlist
+package com.smeiskaudio.travelwishlist2_with_reason
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import java.util.*
 
 const val TAG = "PLACES_VIEW_MODEL"
-class PlacesViewModel: ViewModel() {
+
+class PlacesViewModel : ViewModel() {
 
     // begin with list of places, example data in parenthesis for easier testing
 
     private val places =
-        mutableListOf<Place>(Place("London, UK"), Place("Utrecht, NL"), Place("Milwaukee, WI, USA", Date())) // let user add places
+        mutableListOf<Place>(
+            Place("London, UK"),
+            Place("Utrecht, NL"),
+            Place("Milwaukee, WI, USA", Date())
+        ) // let user add places
 
     // enable access to list
     fun getPlaces(): List<Place> {

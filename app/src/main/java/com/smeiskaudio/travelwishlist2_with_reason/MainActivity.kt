@@ -1,21 +1,20 @@
-package com.smeiskaudio.travelwishlist
+package com.smeiskaudio.travelwishlist2_with_reason
 
 import android.content.Context
 import android.content.Intent
-import android.location.GnssAntennaInfo.Listener
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.smeiskaudio.travelwishlist.R
 
 class MainActivity : AppCompatActivity(),
     OnListItemClickedListener, OnDateChangedListener {
@@ -62,9 +61,11 @@ class MainActivity : AppCompatActivity(),
     private fun addNewPlace() {
         val name = newPlaceEditText.text.toString().trim()
         if (name.isEmpty()) {
-            Toast.makeText(this,
-            getString(R.string.enter_a_place_name),
-            Toast.LENGTH_SHORT)
+            Toast.makeText(
+                this,
+                getString(R.string.enter_a_place_name),
+                Toast.LENGTH_SHORT
+            )
                 .show()
         } else {
             val newPlace = Place(name)
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity(),
         }
 
     }
+
     private fun clearForm() {
         newPlaceEditText.text.clear()
     }
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onListItemClicked(place: Place) { // override means coming from an interface
-        Toast.makeText(this,"${place.name} map icon was clicked", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${place.name} map icon was clicked", Toast.LENGTH_SHORT).show()
         val placeLocationUri = Uri.parse("geo:0,0?q=${place.name}")
         val mapIntent = Intent(Intent.ACTION_VIEW, placeLocationUri)
         startActivity(mapIntent)
@@ -104,15 +106,20 @@ class MainActivity : AppCompatActivity(),
 
     override fun onListItemMoved(from: Int, to: Int) {
         placesViewModel.movePlace(from, to) // removes the entry from the view model
-        placesRecyclerAdapter.notifyItemMoved(from,  to) // tells the recycler adapter about the change
+        placesRecyclerAdapter.notifyItemMoved(
+            from,
+            to
+        ) // tells the recycler adapter about the change
     }
 
     override fun onListItemDeleted(position: Int) {
         val deletedPlace = placesViewModel.deletePlace(position)
         placesRecyclerAdapter.notifyItemRemoved(position)
 
-        Snackbar.make(findViewById(R.id.wishlist_container),
-            getString(R.string.confirmation_place_deleted, deletedPlace.name), 5000)
+        Snackbar.make(
+            findViewById(R.id.wishlist_container),
+            getString(R.string.confirmation_place_deleted, deletedPlace.name), 5000
+        )
             .setActionTextColor(getColor(R.color.red))
             .setBackgroundTint(getColor(R.color.snack_background))
             .setTextColor(getColor(R.color.text_color_dark_green))
