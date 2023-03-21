@@ -14,7 +14,7 @@ class PlacesViewModel : ViewModel() {
         mutableListOf<Place>(
             Place("London, UK", "Never been there, always wanted to visit."),
             Place("Veldhoven, NL", "Family lives nearby"),
-            Place("Milwaukee, WI, USA", "More family lives nearby", Date())
+            Place("Milwaukee, WI, USA", "More family lives nearby")
         ) // let user add places
 
     // enable access to list
@@ -66,6 +66,10 @@ class PlacesViewModel : ViewModel() {
 
     fun deletePlace(position: Int): Place {
         return places.removeAt(position)
+    }
+
+    fun updatePlace(place: Place) {
+        // todo
     }
 }
 

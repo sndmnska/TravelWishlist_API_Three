@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.smeiskaudio.travelwishlist.R
 
 class MainActivity : AppCompatActivity(),
-    OnListItemClickedListener, OnDateChangedListener {
+    OnListItemClickedListener, OnDataChangedListener {
 
     private lateinit var newPlaceEditText: EditText
     private lateinit var addNewPlaceButton: Button
@@ -121,36 +121,41 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onListItemClicked(place: Place) { // override means coming from an interface
+    override fun onMapRequestButtonClicked(place: Place) { // override means coming from an interface
         Toast.makeText(this, "${place.name} map icon was clicked", Toast.LENGTH_SHORT).show()
         val placeLocationUri = Uri.parse("geo:0,0?q=${place.name}")
         val mapIntent = Intent(Intent.ACTION_VIEW, placeLocationUri)
         startActivity(mapIntent)
     }
 
-    override fun onListItemMoved(from: Int, to: Int) {
-        placesViewModel.movePlace(from, to) // removes the entry from the view model
-        placesRecyclerAdapter.notifyItemMoved(
-            from,
-            to
-        ) // tells the recycler adapter about the change
+    override fun onStarredStatusChanged(place: Place, isStarred: Boolean) {
+        place.starred = isStarred
+        placesViewModel.updatePlace(place)
     }
+
+//    override fun onListItemMoved(from: Int, to: Int) {
+//        placesViewModel.movePlace(from, to) // removes the entry from the view model
+//        placesRecyclerAdapter.notifyItemMoved(
+//            from,
+//            to
+//        ) // tells the recycler adapter about the change
+//    }
 
     override fun onListItemDeleted(position: Int) {
         val deletedPlace = placesViewModel.deletePlace(position)
         placesRecyclerAdapter.notifyItemRemoved(position)
 
-        Snackbar.make(
-            findViewById(R.id.wishlist_container),
-            getString(R.string.confirmation_place_deleted, deletedPlace.name), 5000
-        )
-            .setActionTextColor(getColor(R.color.red))
-            .setBackgroundTint(getColor(R.color.snack_background))
-            .setTextColor(getColor(R.color.text_color_dark_green))
-            .setAction(getString(R.string.undo)) {// display an "UNDO" button
-                placesViewModel.addNewPlace(deletedPlace, position)
-                placesRecyclerAdapter.notifyItemInserted(position)
-            }
-            .show()
+//        Snackbar.make(
+//            findViewById(R.id.wishlist_container),
+//            getString(R.string.confirmation_place_deleted, deletedPlace.name), 5000
+//        )
+//            .setActionTextColor(getColor(R.color.red))
+//            .setBackgroundTint(getColor(R.color.snack_background))
+//            .setTextColor(getColor(R.color.text_color_dark_green))
+//            .setAction(getString(R.string.undo)) {// display an "UNDO" button
+//                placesViewModel.addNewPlace(deletedPlace, position)
+//                placesRecyclerAdapter.notifyItemInserted(position)
+//            }
+//            .show()
     }
 }

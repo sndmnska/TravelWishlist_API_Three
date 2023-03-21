@@ -4,15 +4,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 // create an interface, like in RecyclerAdapter
-interface OnDateChangedListener {
-    fun onListItemMoved(from: Int, to: Int)  // move up and down in a list
+interface OnDataChangedListener {
+//    fun onListItemMoved(from: Int, to: Int)  // move up and down in a list
     fun onListItemDeleted(position: Int)
 
 }
 
-class OnListItemSwipeListener(private val onDataChangedListener: OnDateChangedListener) :
+class OnListItemSwipeListener(private val onDataChangedListener: OnDataChangedListener) :
     ItemTouchHelper.SimpleCallback(
-        ItemTouchHelper.UP or ItemTouchHelper.DOWN, // to reorder
+        0, // no reordering
         ItemTouchHelper.RIGHT // to delete
     ) {
     override fun onMove( // moving up and down
@@ -21,9 +21,9 @@ class OnListItemSwipeListener(private val onDataChangedListener: OnDateChangedLi
         target: RecyclerView.ViewHolder
     ): Boolean {
         // where did it move from, and where to?
-        val fromPosition = viewHolder.adapterPosition // where is it on the list?
-        val toPosition = target.adapterPosition // going to where?
-        onDataChangedListener.onListItemMoved(fromPosition, toPosition)
+//        val fromPosition = viewHolder.adapterPosition // where is it on the list?
+//        val toPosition = target.adapterPosition // going to where?
+//        onDataChangedListener.onListItemMoved(fromPosition, toPosition)
         return true // is the move permitted?
     }
 

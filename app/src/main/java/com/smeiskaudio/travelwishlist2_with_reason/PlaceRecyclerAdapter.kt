@@ -3,13 +3,15 @@ package com.smeiskaudio.travelwishlist2_with_reason
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.smeiskaudio.travelwishlist.R
 
 interface OnListItemClickedListener {
-    fun onListItemClicked(place: Place)
+    fun onMapRequestButtonClicked(place: Place)
+    fun onStarredStatusChanged(place: Place, isStarred: Boolean)
 }
 
 /** You'll see a lot of red until you're done with the Adapter */
@@ -39,15 +41,23 @@ class PlaceRecyclerAdapter(
             val reasonTextView: TextView = view.findViewById(R.id.reason_textview)
             reasonTextView.text = place.reason
 
+            /* Removing "dateCreated" functionality*/
             // textViews have to display strings
-            val dateCreatedOnTextView: TextView = view.findViewById(R.id.date_place_added)
-            val createdOnText = view.context.getString(R.string.created_on, place.formattedDate())
-            dateCreatedOnTextView.text = createdOnText
+////            val dateCreatedOnTextView: TextView = view.findViewById(R.id.date_place_added)
+//            val createdOnText = view.context.getString(R.string.created_on, place.formattedDate())
+//            dateCreatedOnTextView.text = createdOnText
 
             val mapIcon: ImageView = view.findViewById(R.id.map_icon)
             mapIcon.setOnClickListener {
                 // what now?
-                onListItemClickedListener.onListItemClicked(place)
+                onListItemClickedListener.onMapRequestButtonClicked(place)
+            }
+
+            val starCheck = view.findViewById<CheckBox>(R.id.star_check)
+            starCheck.setOnClickListener(null)
+            starCheck.isChecked = place.starred
+            starCheck.setOnClickListener {
+                onListItemClickedListener.onStarredStatusChanged(place, starCheck.isChecked)
             }
 
         }
