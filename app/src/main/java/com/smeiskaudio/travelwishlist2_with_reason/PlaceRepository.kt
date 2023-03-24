@@ -53,7 +53,7 @@ class PlaceRepository {
     suspend fun addPlace(place: Place): ApiResult<Place> {
         return apiCall(
             { placeService.addPlace(place) } , // lambda function
-        "Place created!",
+        "New place created: $place",
         "Error adding a place - is name unique?"
         )
 
@@ -68,7 +68,7 @@ class PlaceRepository {
         } else {
             return apiCall(
                 {placeService.updatePlace(place, place.id) },
-            "Place updated!",
+            "$place star status updated!",
             "Error updating place \"$place\""
             )
         }
@@ -83,7 +83,7 @@ class PlaceRepository {
         } else {
             return apiCall(
                 { placeService.deletePlace(place.id) },
-                "Place deleted",
+                "$place deleted",
                 "Error deleting place \"$place\" from list"
             )
         }
